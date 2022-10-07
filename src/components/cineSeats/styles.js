@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CineSeatsContainer = styled.div`
-	margin: 100px 0px;
+	margin: 100px 0px 150px 0px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -23,29 +23,44 @@ export const SeatsNumberContainer = styled.div`
 	padding: 30px 0px;
 `;
 
-export const SeatLegendsContainer = styled.div`
-	width: 80%;
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-`;
-
-export const SeatLegend = styled.div`
+export const InputsContainer = styled.form`
+	margin-top: 40px;
+	width: 85%;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
-	div {
-		width: 25px;
-		height: 25px;
-		background: ${({ color }) => (color === "green" ? "#1aae9e" : color === "gray" ? "#C3CFD9" : "#FBE192")};
-		border: 1px solid ${({ color }) => (color === "green" ? "#0E7D71" : color === "gray" ? "#7B8B99" : "#F7C52B")};
-		border-radius: 17px;
+	button {
+		margin-top: 20px;
+		align-self: center;
+		width: 225px;
+		height: 42px;
+		border: none;
+		background: #e8833a;
+		border-radius: 3px;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 21px;
+		letter-spacing: 0.04em;
+		color: #ffffff;
+	}
+	input {
+		height: 51px;
+		background: #ffffff;
+		border: 1px solid #d5d5d5;
+		border-radius: 3px;
+		margin-top: 3px;
+		margin-bottom: 15px;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 21px;
+		color: #afafaf;
+		padding: 10px;
+	}
+	label {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 21px;
 	}
 `;
-
-export const InputsContainer = styled.div``;
 
 export const FooterInfoContainer = styled.div`
 	position: fixed;
