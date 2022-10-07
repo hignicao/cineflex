@@ -1,82 +1,51 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-const filmes = [
-	{
-		id: 1,
-		title: "2067",
-		posterURL: "https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
-		overview:
-			"A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
-		releaseDate: "2020-10-01T00:00:00.000Z",
-	},
-	{
-		id: 2,
-		title: "Welcome to Sudden Death",
-		posterURL: "https://image.tmdb.org/t/p/w500/elZ6JCzSEvFOq4gNjNeZsnRFsvj.jpg",
-		overview:
-			"Jesse Freeman is a former special forces officer and explosives expert now working a regular job as a security guard in a state-of-the-art basketball arena. Trouble erupts when a tech-savvy cadre of terrorists kidnap the team's owner and Jesse's daughter during opening night. Facing a ticking clock and impossible odds, it's up to Jesse to not only save them but also a full house of fans in this highly charged action thriller.",
-		releaseDate: "2020-09-29T00:00:00.000Z",
-	},
-	{
-		id: 2,
-		title: "Welcome to Sudden Death",
-		posterURL: "https://image.tmdb.org/t/p/w500/elZ6JCzSEvFOq4gNjNeZsnRFsvj.jpg",
-		overview:
-			"Jesse Freeman is a former special forces officer and explosives expert now working a regular job as a security guard in a state-of-the-art basketball arena. Trouble erupts when a tech-savvy cadre of terrorists kidnap the team's owner and Jesse's daughter during opening night. Facing a ticking clock and impossible odds, it's up to Jesse to not only save them but also a full house of fans in this highly charged action thriller.",
-		releaseDate: "2020-09-29T00:00:00.000Z",
-	},
-	{
-		id: 2,
-		title: "Welcome to Sudden Death",
-		posterURL: "https://image.tmdb.org/t/p/w500/elZ6JCzSEvFOq4gNjNeZsnRFsvj.jpg",
-		overview:
-			"Jesse Freeman is a former special forces officer and explosives expert now working a regular job as a security guard in a state-of-the-art basketball arena. Trouble erupts when a tech-savvy cadre of terrorists kidnap the team's owner and Jesse's daughter during opening night. Facing a ticking clock and impossible odds, it's up to Jesse to not only save them but also a full house of fans in this highly charged action thriller.",
-		releaseDate: "2020-09-29T00:00:00.000Z",
-	},
-	{
-		id: 2,
-		title: "Welcome to Sudden Death",
-		posterURL: "https://image.tmdb.org/t/p/w500/elZ6JCzSEvFOq4gNjNeZsnRFsvj.jpg",
-		overview:
-			"Jesse Freeman is a former special forces officer and explosives expert now working a regular job as a security guard in a state-of-the-art basketball arena. Trouble erupts when a tech-savvy cadre of terrorists kidnap the team's owner and Jesse's daughter during opening night. Facing a ticking clock and impossible odds, it's up to Jesse to not only save them but also a full house of fans in this highly charged action thriller.",
-		releaseDate: "2020-09-29T00:00:00.000Z",
-	},
-	{
-		id: 2,
-		title: "Welcome to Sudden Death",
-		posterURL: "https://image.tmdb.org/t/p/w500/elZ6JCzSEvFOq4gNjNeZsnRFsvj.jpg",
-		overview:
-			"Jesse Freeman is a former special forces officer and explosives expert now working a regular job as a security guard in a state-of-the-art basketball arena. Trouble erupts when a tech-savvy cadre of terrorists kidnap the team's owner and Jesse's daughter during opening night. Facing a ticking clock and impossible odds, it's up to Jesse to not only save them but also a full house of fans in this highly charged action thriller.",
-		releaseDate: "2020-09-29T00:00:00.000Z",
-	},
-	{
-		id: 2,
-		title: "Welcome to Sudden Death",
-		posterURL: "https://image.tmdb.org/t/p/w500/elZ6JCzSEvFOq4gNjNeZsnRFsvj.jpg",
-		overview:
-			"Jesse Freeman is a former special forces officer and explosives expert now working a regular job as a security guard in a state-of-the-art basketball arena. Trouble erupts when a tech-savvy cadre of terrorists kidnap the team's owner and Jesse's daughter during opening night. Facing a ticking clock and impossible odds, it's up to Jesse to not only save them but also a full house of fans in this highly charged action thriller.",
-		releaseDate: "2020-09-29T00:00:00.000Z",
-	},
-	{
-		id: 2,
-		title: "Welcome to Sudden Death",
-		posterURL: "https://image.tmdb.org/t/p/w500/elZ6JCzSEvFOq4gNjNeZsnRFsvj.jpg",
-		overview:
-			"Jesse Freeman is a former special forces officer and explosives expert now working a regular job as a security guard in a state-of-the-art basketball arena. Trouble erupts when a tech-savvy cadre of terrorists kidnap the team's owner and Jesse's daughter during opening night. Facing a ticking clock and impossible odds, it's up to Jesse to not only save them but also a full house of fans in this highly charged action thriller.",
-		releaseDate: "2020-09-29T00:00:00.000Z",
-	},
-];
+import axios from "axios";
 
 export default function CineMain() {
+	const [movies, setMovies] = useState(undefined);
+	const [error, setError] = useState(false);
+
+	useEffect(() => {
+		const URL = "https://mock-api.driven.com.br/api/v5/cineflex/movies";
+
+		const promise = axios.get(URL);
+
+		promise.then((res) => {
+			setMovies(res.data);
+		});
+
+		promise.catch((err) => {
+			console.log(err.response.data);
+			setError(true);
+		});
+	}, []);
+
+	if (error === true) {
+		return (
+			<CineMainContainer>
+				<p>Erro na requisição! Tente de novo</p>
+			</CineMainContainer>
+		);
+	}
+
+	if (!error && movies === undefined) {
+		return (
+			<CineMainContainer>
+				<p>Carregando...</p>
+			</CineMainContainer>
+		);
+	}
+
 	return (
 		<CineMainContainer>
 			<p>Selecione o filme:</p>
 			<MoviesListContainer>
-				{filmes.map((el) => (
-					<MovieLink>
+				{movies.map((el) => (
+					<MovieLink key={el.id} to={`/sessoes/${el.id}`}>
 						<MoviePoster>
-							<img src={el.posterURL} alt="Poster do Filme" />
+							<img src={el.posterURL} alt={`Poster do filme ${el.title}`} />
 							<div></div>
 							<span>{el.title}</span>
 						</MoviePoster>
@@ -88,16 +57,17 @@ export default function CineMain() {
 }
 
 const CineMainContainer = styled.div`
-	margin-top: 30px;
+	margin: 100px 0px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	p {
+	> p {
 		font-weight: 400;
 		font-size: 24px;
 		line-height: 28px;
 		letter-spacing: 0.04em;
+		color: #293845;
 	}
 `;
 
