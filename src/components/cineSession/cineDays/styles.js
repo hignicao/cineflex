@@ -1,24 +1,6 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function CineDays({ day }) {
-	return (
-		<DaysContainer>
-			<p>
-				{day.weekday} - {day.date}
-			</p>
-			<ListSessionsContainer>
-				{day.showtimes.map((el) => (
-          <Link key={el.id} to={`/assentos/${el.id}`}>
-					  <button>{el.name}</button>
-          </Link>
-				))}
-			</ListSessionsContainer>
-		</DaysContainer>
-	);
-}
-
-const DaysContainer = styled.div`
+export const DaysContainer = styled.div`
 	p {
 		font-weight: 400;
 		font-size: 20px;
@@ -27,7 +9,7 @@ const DaysContainer = styled.div`
 	}
 `;
 
-const ListSessionsContainer = styled.div`
+export const ListSessionsContainer = styled.div`
   padding: 20px 0px;
 	display: flex;
 	justify-content: flex-start;

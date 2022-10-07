@@ -1,14 +1,6 @@
 import styled from "styled-components";
 
-export default function Seat({ seat }) {
-	return (
-		<SeatContainer>
-			<p>{seat.name}</p>
-		</SeatContainer>
-	);
-}
-
-const SeatContainer = styled.div`
+export const SeatContainer = styled.div`
 	width: 26px;
 	height: 26px;
 	display: flex;

@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyles";
 import Header from "./Header";
-import CineMain from "./CineMain";
-import CineSession from "./CineSession";
-import CineSeats from "./CineSeats";
-import CineSuccess from "./CineSuccess";
+import CineMain from "./cineMain";
+import CineSession from "./cineSession";
+import CineSeats from "./cineSeats";
+import CineSuccess from "./cineSuccess";
 
 export default function App() {
 	return (
