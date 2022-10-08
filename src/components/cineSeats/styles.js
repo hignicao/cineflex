@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CineSeatsContainer = styled.div`
-	margin: 100px 0px 150px 0px;
+	margin: 100px 20px 150px 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -15,7 +15,8 @@ export const CineSeatsContainer = styled.div`
 	}
 `;
 export const SeatsNumberContainer = styled.div`
-	width: 85%;
+	max-width: 400px;
+	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -25,7 +26,8 @@ export const SeatsNumberContainer = styled.div`
 
 export const InputsContainer = styled.form`
 	margin-top: 40px;
-	width: 85%;
+	max-width: 350px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	button {
@@ -82,7 +84,7 @@ export const FooterInfoContainer = styled.div`
 	}
 	p {
 		font-weight: 400;
-		font-size: 26px;
+		font-size: 24px;
 		line-height: 30px;
 		color: #293845;
 	}

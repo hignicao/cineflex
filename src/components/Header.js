@@ -1,12 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Header() {
-	const navigate = useNavigate()
+export default function Header({ setSelectedSeats }) {
+	const navigate = useNavigate();
+
+	function resetSection() {
+		setSelectedSeats([]);
+		navigate("/");
+	}
 
 	return (
 		<HeaderContainer>
-			<h1 onClick={() => navigate("/")}>CINEFLEX</h1>
+			<h1 onClick={resetSection}>CINEFLEX</h1>
 		</HeaderContainer>
 	);
 }

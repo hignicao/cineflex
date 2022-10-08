@@ -6,8 +6,8 @@ export const SeatContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: ${({ status }) => (status ? "#C3CFD9" : !status  ? "#fb9292" : "#1aae9e" )};
-		border: 1px solid ${({ status }) => (status ? "#7B8B99" : !status  ? "#f72b2b" : "#0E7D71" )};
+	background: ${({ status, selected }) => (selected ? "#1aae9e" : status ? "#C3CFD9" : "#fb9292")};
+	border: 1px solid ${({ status, selected }) => (selected ? "#0E7D71" : status ? "#7B8B99" : "#f72b2b")};
 	border-radius: 12px;
 	p {
 		font-weight: 400;

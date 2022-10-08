@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const SeatLabelsContainer = styled.div`
-	width: 80%;
+	max-width: 400px;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;

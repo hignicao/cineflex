@@ -8,9 +8,9 @@ export default function CineDays({ day }) {
 				{day.weekday} - {day.date}
 			</p>
 			<ListSessionsContainer>
-				{day.showtimes.map((el) => (
-          <Link key={el.id} to={`/assentos/${el.id}`}>
-					  <button>{el.name}</button>
+				{day.showtimes.map((time) => (
+          <Link key={time.id} to={`/assentos/${time.id}`}>
+					  <button>{time.name}</button>
           </Link>
 				))}
 			</ListSessionsContainer>

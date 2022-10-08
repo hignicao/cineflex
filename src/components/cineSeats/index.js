@@ -1,14 +1,57 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Seat from "./seat";
 import SeatLabels from "./seatLabels";
 import { CineSeatsContainer, FooterInfoContainer, InputsContainer, SeatsNumberContainer } from "./styles";
 
-export default function CineSeats() {
+export default function CineSeats({ buyerName, setBuyerName, buyerCPF, setBuyerCPF, selectedSeats, setSelectedSeats, finalMovie, setFinalMovie }) {
 	const [sessionSeats, setSessionSeats] = useState(undefined);
 	const [error, setError] = useState(false);
 	const { sessionID } = useParams();
+	const navigate = useNavigate();
+
+	function selectSeat(seat) {
+		if (seat.isAvailable === false) {
+			alert("Assento não disponível");
+			return;
+		}
+
+		seat.selected = !seat.selected;
+
+		if (!seat.selected) {
+			const filteredSeats = selectedSeats.filter((s) => !(s.id === seat.id));
+			setSelectedSeats([...filteredSeats]);
+			return;
+		}
+		setSelectedSeats([...selectedSeats, seat]);
+		return;
+	}
+
+	function reserveSeats(e) {
+		e.preventDefault();
+
+		const URL = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many";
+		const seatsIDs = [];
+
+		selectedSeats.map((seat) => seatsIDs.push(seat.id));
+
+		const body = {
+			ids: seatsIDs,
+			name: buyerName,
+			cpf: buyerCPF,
+		};
+
+		const promise = axios.post(URL, body);
+
+		promise.then(() => {
+			navigate("/sucesso");
+		});
+
+		promise.catch((err) => {
+			alert(err.response.data.mensagem);
+		});
+	}
 
 	useEffect(() => {
 		const URL = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessionID}/seats`;
@@ -17,6 +60,7 @@ export default function CineSeats() {
 
 		promise.then((res) => {
 			setSessionSeats(res.data);
+			setFinalMovie(res.data);
 		});
 
 		promise.catch((err) => {
@@ -45,17 +89,17 @@ export default function CineSeats() {
 		<CineSeatsContainer>
 			<p>Selecione o(s) assento(s):</p>
 			<SeatsNumberContainer>
-				{sessionSeats.seats.map((el) => (
-					<Seat key={el.id} seat={el} />
+				{sessionSeats.seats.map((seat) => (
+					<Seat key={seat.id} seat={seat} selectSeat={selectSeat} />
 				))}
 			</SeatsNumberContainer>
 			<SeatLabels />
-			<InputsContainer>
-					<label htmlFor="buyer-name">Nome do Comprador:</label>
-					<input type="text" placeholder="Digite seu nome" />
-					<label htmlFor="buyer-cpf">CPF do comprador:</label>
-					<input type="text" placeholder="Digite seu CPF" />
-					<button type="submit">Reservar assento(s)</button>
+			<InputsContainer onSubmit={reserveSeats}>
+				<label htmlFor="buyer-name">Nome do Comprador:</label>
+				<input required id="buyer-name" type="text" placeholder="Digite seu nome" onChange={(e) => setBuyerName(e.target.value)} />
+				<label htmlFor="buyer-cpf">CPF do comprador:</label>
+				<input required id="buyer-cpf" type="text" placeholder="Digite seu CPF" onChange={(e) => setBuyerCPF(e.target.value)} />
+				<button type="submit">Reservar assento(s)</button>
 			</InputsContainer>
 			<FooterInfoContainer>
 				<img src={sessionSeats.movie.posterURL} alt="Poster do filme selecionado" />
