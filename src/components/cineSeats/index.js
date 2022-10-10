@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Seat from "./seat";
 import SeatLabels from "./seatLabels";
-import { CineSeatsContainer, FooterInfoContainer, InputsContainer, SeatsNumberContainer } from "./styles";
+import { BackButton, CineSeatsContainer, FooterInfoContainer, InputsContainer, SeatsNumberContainer } from "./styles";
 
-export default function CineSeats({ buyerName, setBuyerName, buyerCPF, setBuyerCPF, selectedSeats, setSelectedSeats, finalMovie, setFinalMovie }) {
+export default function CineSeats({ buyerName, setBuyerName, buyerCPF, setBuyerCPF, selectedSeats, setSelectedSeats, setFinalMovie }) {
 	const [sessionSeats, setSessionSeats] = useState(undefined);
 	const [error, setError] = useState(false);
 	const { sessionID } = useParams();
@@ -87,6 +87,7 @@ export default function CineSeats({ buyerName, setBuyerName, buyerCPF, setBuyerC
 
 	return (
 		<CineSeatsContainer>
+			<BackButton onClick={() => navigate(-1)}>↩</BackButton>
 			<p>Selecione o(s) assento(s):</p>
 			<SeatsNumberContainer>
 				{sessionSeats.seats.map((seat) => (
@@ -111,6 +112,7 @@ export default function CineSeats({ buyerName, setBuyerName, buyerCPF, setBuyerC
 					id="buyer-cpf"
 					type="text"
 					placeholder="Digite seu CPF"
+					maxlength="11"
 					onChange={(e) => setBuyerCPF(e.target.value)}
 				/>
 				<button data-identifier="reservation-btn" type="submit">Reservar assento(s)</button>

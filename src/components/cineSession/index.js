@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CineDays from "./cineDays";
-import { CineSessionContainer, FooterInfoContainer, ListDaysContainer } from "./styles";
+import { BackButton, CineSessionContainer, FooterInfoContainer, ListDaysContainer } from "./styles";
 
 export default function CineSession() {
 	const [movieSessions, setMovieSessions] = useState(undefined);
 	const [error, setError] = useState(false);
 	const { movieID } = useParams();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const URL = `https://mock-api.driven.com.br/api/v5/cineflex/movies/${movieID}/showtimes`;
@@ -42,6 +43,7 @@ export default function CineSession() {
 
 	return (
 		<CineSessionContainer>
+			<BackButton onClick={() => navigate(-1)}>↩</BackButton>
 			<p>Selecione o horário:</p>
 			<ListDaysContainer>
 				{movieSessions.days.map((el) => (

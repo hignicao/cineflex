@@ -27,7 +27,7 @@ const HeaderContainer = styled.div`
 	align-items: center;
 	justify-content: center;
 	h1 {
-		font-weight: 400;
+		font-weight: 500;
 		font-size: 34px;
 		line-height: 40px;
 		color: #e8833a;

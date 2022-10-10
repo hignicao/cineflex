@@ -26,7 +26,6 @@ export default function App() {
 										buyerName={buyerName}
 										buyerCPF={buyerCPF}
 										selectedSeats={selectedSeats}
-										finalMovie={finalMovie}
 										setBuyerName={setBuyerName}
 										setBuyerCPF={setBuyerCPF}
 										setSelectedSeats={setSelectedSeats}

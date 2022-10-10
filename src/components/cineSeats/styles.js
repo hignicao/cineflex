@@ -54,8 +54,11 @@ export const InputsContainer = styled.form`
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 21px;
-		color: #afafaf;
 		padding: 10px;
+		outline: none;
+		::placeholder {
+			color: #afafaf;
+		}
 	}
 	label {
 		font-weight: 400;
@@ -89,3 +92,20 @@ export const FooterInfoContainer = styled.div`
 		color: #293845;
 	}
 `;
+
+export const BackButton = styled.button`
+	width: 35px;
+	height: 35px;
+	position: fixed;
+	top: 17px;
+	left: 17px;
+	z-index: 3;
+	border: none;
+	background: #e8833a;
+	border-radius: 50%;
+	font-weight: 400;
+	font-size: 22px;
+	color: #ffffff;
+	cursor: pointer;
+`;
+
