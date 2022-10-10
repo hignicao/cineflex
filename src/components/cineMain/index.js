@@ -42,7 +42,7 @@ export default function CineMain() {
 			<p>Selecione o filme:</p>
 			<MoviesListContainer>
 				{movies.map((el) => (
-					<MovieLink key={el.id} to={`/sessoes/${el.id}`}>
+					<MovieLink data-identifier="movie-outdoor" key={el.id} to={`/sessoes/${el.id}`}>
 						<MoviePoster>
 							<img src={el.posterURL} alt={`Poster do filme ${el.title}`} />
 							<div></div>

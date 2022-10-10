@@ -49,8 +49,8 @@ export default function CineSession() {
 				))}
 			</ListDaysContainer>
 			<FooterInfoContainer>
-				<img src={movieSessions.posterURL} alt="Poster do filme selecionado" />
-				<p>{movieSessions.title}</p>
+				<img data-identifier="movie-img-preview" src={movieSessions.posterURL} alt="Poster do filme selecionado" />
+				<p data-identifier="movie-and-session-infos-preview" >{movieSessions.title}</p>
 			</FooterInfoContainer>
 		</CineSessionContainer>
 	);

@@ -95,17 +95,31 @@ export default function CineSeats({ buyerName, setBuyerName, buyerCPF, setBuyerC
 			</SeatsNumberContainer>
 			<SeatLabels />
 			<InputsContainer onSubmit={reserveSeats}>
-				<label htmlFor="buyer-name">Nome do Comprador:</label>
-				<input required id="buyer-name" type="text" placeholder="Digite seu nome" onChange={(e) => setBuyerName(e.target.value)} />
+				<label htmlFor="buyer-name">Nome do comprador:</label>
+				<input
+					data-identifier="buyer-name-input"
+					required
+					id="buyer-name"
+					type="text"
+					placeholder="Digite seu nome"
+					onChange={(e) => setBuyerName(e.target.value)}
+				/>
 				<label htmlFor="buyer-cpf">CPF do comprador:</label>
-				<input required id="buyer-cpf" type="text" placeholder="Digite seu CPF" onChange={(e) => setBuyerCPF(e.target.value)} />
-				<button type="submit">Reservar assento(s)</button>
+				<input
+					data-identifier="buyer-cpf-input"
+					required
+					id="buyer-cpf"
+					type="text"
+					placeholder="Digite seu CPF"
+					onChange={(e) => setBuyerCPF(e.target.value)}
+				/>
+				<button data-identifier="reservation-btn" type="submit">Reservar assento(s)</button>
 			</InputsContainer>
 			<FooterInfoContainer>
 				<img src={sessionSeats.movie.posterURL} alt="Poster do filme selecionado" />
 				<div>
-					<p>{sessionSeats.movie.title}</p>
-					<p>
+					<p data-identifier="movie-and-session-infos-preview" >{sessionSeats.movie.title}</p>
+					<p data-identifier="movie-and-session-infos-preview" >
 						{sessionSeats.day.weekday} - {sessionSeats.name}
 					</p>
 				</div>
