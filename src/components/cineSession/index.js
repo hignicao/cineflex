@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CineDays from "./cineDays";
-import { BackButton, CineSessionContainer, FooterInfoContainer, ListDaysContainer } from "./styles";
+import { BackButton, CineSessionContainer, FooterInfoContainer, ListDaysContainer, Loading } from "./styles";
 
 export default function CineSession() {
 	const [movieSessions, setMovieSessions] = useState(undefined);
@@ -36,7 +36,10 @@ export default function CineSession() {
 	if (!error && movieSessions === undefined) {
 		return (
 			<CineSessionContainer>
-				<p>Carregando...</p>
+				<Loading>
+					<div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+					<p>Carregando...</p>
+				</Loading>
 			</CineSessionContainer>
 		);
 	}

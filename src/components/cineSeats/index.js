@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Seat from "./seat";
 import SeatLabels from "./seatLabels";
-import { BackButton, CineSeatsContainer, FooterInfoContainer, InputsContainer, SeatsNumberContainer } from "./styles";
+import { BackButton, CineSeatsContainer, FooterInfoContainer, InputsContainer, Loading, SeatsNumberContainer } from "./styles";
 
 export default function CineSeats({ buyerName, setBuyerName, buyerCPF, setBuyerCPF, selectedSeats, setSelectedSeats, setFinalMovie }) {
 	const [sessionSeats, setSessionSeats] = useState(undefined);
@@ -67,7 +67,7 @@ export default function CineSeats({ buyerName, setBuyerName, buyerCPF, setBuyerC
 			console.log(err.response.data);
 			setError(true);
 		});
-	}, [sessionID]);
+	}, [sessionID, setFinalMovie]);
 
 	if (error === true) {
 		return (
@@ -80,7 +80,10 @@ export default function CineSeats({ buyerName, setBuyerName, buyerCPF, setBuyerC
 	if (!error && sessionSeats === undefined) {
 		return (
 			<CineSeatsContainer>
-				<p>Carregando...</p>
+				<Loading>
+					<div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+					<p>Carregando...</p>
+				</Loading>
 			</CineSeatsContainer>
 		);
 	}
@@ -112,7 +115,7 @@ export default function CineSeats({ buyerName, setBuyerName, buyerCPF, setBuyerC
 					id="buyer-cpf"
 					type="text"
 					placeholder="Digite seu CPF"
-					maxlength="11"
+					maxLength="11"
 					onChange={(e) => setBuyerCPF(e.target.value)}
 				/>
 				<button data-identifier="reservation-btn" type="submit">Reservar assento(s)</button>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { CineMainContainer, MovieLink, MoviePoster, MoviesListContainer } from "./styles";
+import { CineMainContainer, Loading, MovieLink, MoviePoster, MoviesListContainer } from "./styles";
 
 export default function CineMain() {
 	const [movies, setMovies] = useState(undefined);
@@ -32,7 +32,10 @@ export default function CineMain() {
 	if (!error && movies === undefined) {
 		return (
 			<CineMainContainer>
-				<p>Carregando...</p>
+				<Loading>
+					<div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+					<p>Carregando...</p>
+				</Loading>
 			</CineMainContainer>
 		);
 	}
